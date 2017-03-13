@@ -1,6 +1,5 @@
-#include "add.h"
-#include <iostream>
+#include "Tree_from_Array.h"
 
 int main() {
-  std::cout << "2 + 2 = " << add(2, 2) << std::endl;
+	return 0;
 }
