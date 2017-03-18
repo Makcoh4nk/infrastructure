@@ -1,26 +1,8 @@
 #include "Tree_from_Array.h"
 
-Branch **find(Branch **root, int value) {
-	Branch **temp = root;
-	while (*root) {
-		if ((*root)->data == value) {
-			return root;
-		}
-		else if ((*root)->data < value) {
-			root = &(*root)->right;
-		}
-		else { root = &(*root)->left; }
-	}
-	return root;
-}
-
-void Init_tree(Branch **tree) {
-	*tree = Add_leaf((*tree), 10);
-	*tree = Add_leaf((*tree), 12);
-	*tree = Add_leaf((*tree), 8);
-	*tree = Add_leaf((*tree), 6);
-	*tree = Add_leaf((*tree), 7);
-	*tree = Add_leaf((*tree), 4);
+void Init_tree(Branch **tree, int ar[size_t]) {
+	for (int i = 0; i < size_t; ++i)
+		*tree = Add_leaf(*tree, ar[i]);
 }
 
 Branch *Add_leaf(Branch *root, int val) {

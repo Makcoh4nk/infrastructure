@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
 
-project(infrastructure)
+project(Tree_from_Array)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -21,7 +21,6 @@ function(enable_cxx_compiler_flag_if_supported flag)
 endfunction()
 
 enable_cxx_compiler_flag_if_supported("-Wall")
-enable_cxx_compiler_flag_if_supported("-Werror")
 
 include_directories(include)
 

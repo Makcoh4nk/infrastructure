@@ -5,6 +5,8 @@
 #include <queue>
 #include <iostream>
 
+#define size_t 5
+
 using std::cout;
 using std::cin;
 using std::endl;
@@ -15,9 +17,8 @@ struct Branch {
 	Branch *right;
 };
 
-void Init_tree(Branch **tree);
+void Init_tree(Branch **tree, int ar[size_t]);
 Branch *Add_leaf(Branch *root, int val);
 void Print_tree(Branch *tree);
-Branch **find(Branch **root, int value);
 
 #endif  // INCLUDE_TREE_H_
