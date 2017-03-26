@@ -12,7 +12,7 @@ TEST(Conversion, CorrectConversionArray_1_elem) {
 
 TEST(Conversion, CorrectConversionArray_3_elem) {
     const int size = 3;
-    int temp[size] = { 10, 3, 24,};
+    int temp[size] = { 10, 3, 24 };
     int *act = Conversion(temp, size);
     int exp[size] = { 72, 240, 30 };
     for (int i = 0; i < size; ++i)

@@ -5,12 +5,10 @@ int* Conversion(int* ar, int size) {
 
     int *temp = new int[size];
     int mult = 1;
-    
     for (int i = 0; i < size; ++i) {
         temp[i] = mult;
         mult *= ar[i];
     }
-
     mult = 1;
     for (int i = size - 1; i >= 0; --i) {
         temp[i] *= mult;
