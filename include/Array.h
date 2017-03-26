@@ -1,5 +1,5 @@
-#ifndef INCLUDE_ADD_H_
-#define INCLUDE_ADD_H_
+#ifndef INCLUDE_ARRAY_H_
+#define INCLUDE_ARRAY_H_
 
 #include <iostream>
 
@@ -9,4 +9,4 @@ using std::endl;
 
 int* Conversion(int* ar, int size);
 
-#endif  // INCLUDE_ADD_H_
+#endif  // INCLUDE_ARRAY_H_
