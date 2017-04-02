@@ -6,12 +6,12 @@ char* SearchWay(int x0, int y0, int x, int y) {
     int act_x = x0;
     int act_y = y0;
     int i = 0;
-    
+
     if ((act_x == x) && (act_y == y)) {
         way[i] = '\0';
         return way;
     }
-    
+
     do {
         if (act_x > x) {
             act_x += step;
