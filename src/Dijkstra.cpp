@@ -1,7 +1,8 @@
 #include <set>
 #include "Dijkstra.h"
 
-std::vector<int> Dijkstra(std::vector <std::vector <std::pair <int, int > > > v, int start) {
+std::vector<int> Dijkstra(std::vector <
+	std::vector <std::pair <int, int > > > v, int start) {
     if (v.size() == 0) {
         throw std::logic_error("Graph size = 0");
     }

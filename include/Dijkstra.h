@@ -10,6 +10,7 @@ using std::endl;
 
 #define INF 10000000
 
-std::vector<int> Dijkstra(std::vector <std::vector <std::pair <int, int > > > v, int start);
+std::vector<int> Dijkstra(std::vector <
+	std::vector <std::pair <int, int > > > v, int start);
 
-#endif  // INCLUDE_DIJCSTRA_H_
+#endif  // INCLUDE_DIJKSTRA_H_
