@@ -1,2 +1,2 @@
 #include <gtest/gtest.h>
-#include "Way.h"
+#include "Lab_Work.h"
