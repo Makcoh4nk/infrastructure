@@ -1,6 +1,6 @@
-#include "Way.h"
+#include "Percolation.h"
 #include <iostream>
 
 int main() {
-  std::cout << "2 + 2 = " << add(2, 2) << std::endl;
+    std::cout << Probability(10, 10000);
 }
