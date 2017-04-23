@@ -1,6 +1,6 @@
-#include "Lab_Work.h"
+#include "Percolation.h"
 #include <iostream>
 
 int main() {
-	return 0;
+    std::cout << Probability(10, 10000);
 }
