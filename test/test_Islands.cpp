@@ -5,6 +5,7 @@ int const size = 9;
 
 TEST(Islands_Percolation, All_on_the_place) {
     vector<vector<int>> v(size, vector<int>(size, 0));
+
     for (int i = 0; i < size; ++i) {
         v[i][0] = 1;
         v[i][size - 1] = 1;
