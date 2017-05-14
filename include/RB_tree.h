@@ -32,21 +32,19 @@ extern RB_node<pair<int, int>> NIL_node;
 template <typename T>
 class RB_tree {
 private:
-
     void Rotate_Left(RB_node<T> *x);
     void Rotate_Right(RB_node<T> *x);
     void InsertFixup(RB_node<T> *x);
     void DeleteFixup(RB_node<T> *x);
 
 public:
-
-    RB_node<T> *root;
     RB_tree();
     ~RB_tree();
     void Insert(T x);
     void Delete(T x);
     void Delete(RB_node<T> *x);
     void DeleteMin();
+    RB_node<T> *root;
     RB_node<T>* Find(T x);
     T GetMin();
 
