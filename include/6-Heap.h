@@ -9,12 +9,14 @@ using std::vector;
 template <typename T>
 class SixHeap {
 private:
+
     vector<T> array;
     void ShiftUp(int index);
     void ShiftDown();
     int MinSoon(int index_parent);
 
 public:
+
     void InsertElem(T e);
     void DeleteMin();
     T GetMin();

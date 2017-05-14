@@ -32,12 +32,14 @@ extern RB_node<pair<int, int>> NIL_node;
 template <typename T>
 class RB_tree {
 private:
+
     void Rotate_Left(RB_node<T> *x);
     void Rotate_Right(RB_node<T> *x);
     void InsertFixup(RB_node<T> *x);
     void DeleteFixup(RB_node<T> *x);
 
 public:
+
     RB_node<T> *root;
     RB_tree();
     ~RB_tree();
@@ -91,7 +93,6 @@ template <typename T>
 void RB_tree<T>::Rotate_Left(RB_node<T> *x) {
     RB_node<T> *y = x->right;
     x->right = y->left;
-
     if (y->left != reinterpret_cast<RB_node<T>*>(NIL))
         y->left->parent = x;
     if (y != reinterpret_cast<RB_node<T>*>(NIL))
@@ -104,7 +105,6 @@ void RB_tree<T>::Rotate_Left(RB_node<T> *x) {
     } else {
         root = y;
     }
-
     y->left = x;
     if (x != reinterpret_cast<RB_node<T>*>(NIL))
         x->parent = y;
@@ -114,7 +114,6 @@ template <typename T>
 void RB_tree<T>::Rotate_Right(RB_node<T> *x) {
     RB_node<T> *y = x->left;
     x->left = y->right;
-
     if (y->right != reinterpret_cast<RB_node<T>*>(NIL)) {
         y->right->parent = x;
     }
@@ -129,7 +128,6 @@ void RB_tree<T>::Rotate_Right(RB_node<T> *x) {
     } else {
         root = y;
     }
-
     y->right = x;
     if (x != reinterpret_cast<RB_node<T>*>(NIL))
         x->parent = y;
@@ -137,9 +135,8 @@ void RB_tree<T>::Rotate_Right(RB_node<T> *x) {
 
 /******* Insert FixUp *******/
 
-template < typename T >
+template <typename T>
 void RB_tree<T>::InsertFixup(RB_node<T> *x) {
-
     while (x != root && x->parent->color == RED && x->parent->parent != nullptr) {
         if (x->parent == x->parent->parent->left) {
             RB_node<T> *uncle = x->parent->parent->right;
@@ -147,9 +144,7 @@ void RB_tree<T>::InsertFixup(RB_node<T> *x) {
                 x->parent->color = uncle->color = BLACK;
                 x->parent->parent->color = RED;
                 x = x->parent->parent;
-
             } else {
-
                 if (x == x->parent->right) {
                     x = x->parent;
                     Rotate_Left(x);
@@ -158,17 +153,13 @@ void RB_tree<T>::InsertFixup(RB_node<T> *x) {
                 x->parent->parent->color = RED;
                 Rotate_Right(x->parent->parent);
             }
-
         } else {
-
             RB_node<T> *uncle = x->parent->parent->left;
             if (uncle->color == RED) {
                 x->parent->color = uncle->color = BLACK;
                 x->parent->parent->color = RED;
                 x = x->parent->parent;
-
             } else {
-
                 if (x == x->parent->left) {
                     x = x->parent;
                     Rotate_Right(x);
@@ -186,7 +177,6 @@ void RB_tree<T>::InsertFixup(RB_node<T> *x) {
 
 template < typename T >
 void RB_tree<T>::DeleteFixup(RB_node<T>* x) {
-
     while (x != reinterpret_cast<RB_node<T>*>(NIL) && x != root && x->color == BLACK) {
         if (x == x->parent->left) {
             RB_node<T> *brother = x->parent->right;
@@ -196,28 +186,23 @@ void RB_tree<T>::DeleteFixup(RB_node<T>* x) {
                 Rotate_Left(x->parent);
                 brother = x->parent->right;
             }
-
             if (brother->left->color == BLACK && brother->right->color == BLACK) {
                 brother->color = RED;
                 x = x->parent;
             } else {
-
                 if (brother->right->color == BLACK) {
                     brother->left->color = BLACK;
                     brother->color = RED;
                     Rotate_Right(brother);
                     brother = x->parent->right;
                 }
-
                 brother->color = x->parent->color;
                 x->parent->color = BLACK;
                 brother->right->color = BLACK;
                 Rotate_Left(x->parent);
                 x = root;
             }
-
         } else {
-
             RB_node<T> *brother = x->parent->left;
             if (brother != nullptr) {
                 if (brother->color == RED) {
@@ -226,20 +211,16 @@ void RB_tree<T>::DeleteFixup(RB_node<T>* x) {
                     Rotate_Right(x->parent);
                     brother = x->parent->left;
                 }
-
                 if (brother->right->color == BLACK && brother->left->color == BLACK) {
                     brother->color = RED;
                     x = x->parent;
-
                 } else {
-
                     if (brother->left->color == BLACK) {
                         brother->right->color = BLACK;
                         brother->color = RED;
                         Rotate_Left(brother);
                         brother = x->parent->left;
                     }
-
                     brother->color = x->parent->color;
                     x->parent->color = BLACK;
                     brother->left->color = RED;
