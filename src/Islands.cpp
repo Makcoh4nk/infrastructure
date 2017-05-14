@@ -30,6 +30,7 @@ void Percolation(vector<vector<int>>* m) {
     int left = 1;
     int right = 2;
     int fin = M*M + 3;
+
     vector<int> a(N);
     vector<int> b(N, 1);
 
