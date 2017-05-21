@@ -7,7 +7,7 @@
 using std::vector;
 
 template <typename T>
-class SixHeap {
+class Six_Heap {
 private:
     vector<T> array;
     void ShiftUp(int index);
@@ -31,13 +31,13 @@ public:
 
 
 template <typename T>
-void SixHeap<T>::InsertElem(T e) {
+void Six_Heap<T>::InsertElem(T e) {
     array.push_back(e);
     ShiftUp(array.size() - 1);
 }
 
 template <typename T>
-void SixHeap<T>::ShiftUp(int index) {
+void Six_Heap<T>::ShiftUp(int index) {
     T tmp;
     while (array[index] < array[(index - 1) / 6]) {
         tmp = array[index];
@@ -48,7 +48,7 @@ void SixHeap<T>::ShiftUp(int index) {
 }
 
 template <typename T>
-int SixHeap<T>::MinSoon(int index_parent) {
+int Six_Heap<T>::MinSoon(int index_parent) {
     int i = 0;
     int index = 0;
 
@@ -69,7 +69,7 @@ int SixHeap<T>::MinSoon(int index_parent) {
 }
 
 template <typename T>
-void SixHeap<T>::ShiftDown() {
+void Six_Heap<T>::ShiftDown() {
     T tmp;
     int parent = 0;
     int index_min_soon = MinSoon(0);
@@ -84,7 +84,7 @@ void SixHeap<T>::ShiftDown() {
 }
 
 template <typename T>
-void SixHeap<T>::DeleteMin() {
+void Six_Heap<T>::DeleteMin() {
     if (Size() != 0) {
         array[0] = array[array.size() - 1];
         array.pop_back();
@@ -95,7 +95,7 @@ void SixHeap<T>::DeleteMin() {
 }
 
 template <typename T>
-T SixHeap<T>::GetMin() {
+T Six_Heap<T>::GetMin() {
     if (static_cast<int>(array.size()) != 0) {
         return array[0];
     } else {
@@ -104,7 +104,7 @@ T SixHeap<T>::GetMin() {
 }
 
 template <typename T>
-T SixHeap<T>::operator[](int index) {
+T Six_Heap<T>::operator[](int index) {
     return array[index];
 }
 

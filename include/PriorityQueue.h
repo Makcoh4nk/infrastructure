@@ -5,7 +5,7 @@
 #include "RB_tree.h"
 
 template <typename T>
-class H_PriorityQueue : public SixHeap<T> {
+class H_PriorityQueue : public Six_Heap<T> {
 };
 
 template <typename T>

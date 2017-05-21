@@ -31,7 +31,7 @@ vector<int> Dijkstra_RB_tree(int start, vector <vector <pair <int, int> > > v) {
     return distance;
 }
 
-vector<int> Dijkstra_Heap(int start, vector <vector <pair <int, int> > > v) {
+vector<int> Dijkstra_Six_Heap(int start, vector <vector <pair <int, int> > > v) {
     int n = v.size();
     bool* m = new bool[n];
 
