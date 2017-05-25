@@ -1,7 +1,6 @@
 #ifndef INCLUDE_6_HEAP_H_
 #define INCLUDE_6_HEAP_H_
 
-#include <stdlib.h>
 #include <vector>
 
 using std::vector;

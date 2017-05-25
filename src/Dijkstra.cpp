@@ -1,29 +1,24 @@
 #include "Dijkstra.h"
 
-#include <vector>
-
 vector<int> Dijkstra_RB_tree(int start, vector <vector <pair <int, int> > > v) {
-    int n = v.size();
-    bool* m = new bool[n];
-    for (int i = 0; i < n; ++i)
-        m[i] = false;
-    vector <int> distance(n, 1000000);
+    vector <bool> check(v.size(), false);
+    vector <int> distance(v.size(), 1000000);
     distance[start] = 0;
-    RB_PriorityQueue < pair <int, int> > q;
+    PriorityQueue_on_RBT <pair <int, int> > pq;
     int len = 0;
-    q.Insert(std::make_pair(distance[start], start));
+    pq.Insert(std::make_pair(distance[start], start));
 
-    while (!q.IsEmpty()) {
-        int current_node = q.GetMin().second;
-        q.DeleteMin();
-        if (m[current_node] == false) {
-            m[current_node] = true;
+    while (!pq.IsEmpty()) {
+        int current_node = pq.GetMin().second;
+        pq.DeleteMin();
+        if (check[current_node] == false) {
+            check[current_node] = true;
             for (unsigned int j = 0; j < v[current_node].size(); ++j) {
                 int node = v[current_node][j].second;
                 len = v[current_node][j].first;
                 if (distance[current_node] + len < distance[node]) {
                     distance[node] = distance[current_node] + len;
-                    q.Insert(std::make_pair(distance[node], node));
+                    pq.Insert(std::make_pair(distance[node], node));
                 }
             }
         }
@@ -32,29 +27,24 @@ vector<int> Dijkstra_RB_tree(int start, vector <vector <pair <int, int> > > v) {
 }
 
 vector<int> Dijkstra_Six_Heap(int start, vector <vector <pair <int, int> > > v) {
-    int n = v.size();
-    bool* m = new bool[n];
-
-    for (int i = 0; i < n; ++i)
-        m[i] = false;
-
-    vector <int> distance(n, 1000000);
+    vector <bool> check(v.size(), false);
+    vector <int> distance(v.size(), 1000000);
     distance[start] = 0;
-    H_PriorityQueue < pair < int, int> > q;
-    int len;
+    PriorityQueue_on_HEAP <pair <int, int> > pq;
+    int len = 0;
 
-    q.InsertElem(std::make_pair(distance[start], start));
-    while (!q.IsEmpty()) {
-        int current_node = q.GetMin().second;
-        q.DeleteMin();
-        if (m[current_node] == false) {
-            m[current_node] = true;
+    pq.InsertElem(std::make_pair(distance[start], start));
+    while (!pq.IsEmpty()) {
+        int current_node = pq.GetMin().second;
+        pq.DeleteMin();
+        if (check[current_node] == false) {
+            check[current_node] = true;
             for (unsigned int j = 0; j < v[current_node].size(); ++j) {
                 int node = v[current_node][j].second;
                 len = v[current_node][j].first;
                 if (distance[current_node] + len < distance[node]) {
                     distance[node] = distance[current_node] + len;
-                    q.InsertElem(std::make_pair(distance[node], node));
+                    pq.InsertElem(std::make_pair(distance[node], node));
                 }
             }
         }

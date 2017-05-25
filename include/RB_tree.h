@@ -31,13 +31,13 @@ extern RB_node<pair<int, int>> NIL_node;
 
 template <typename T>
 class RB_tree {
-private:
+ private:
     void Rotate_Left(RB_node<T> *x);
     void Rotate_Right(RB_node<T> *x);
     void InsertFixup(RB_node<T> *x);
     void DeleteFixup(RB_node<T> *x);
 
-public:
+ public:
     RB_tree();
     ~RB_tree();
     void Insert(T x);
