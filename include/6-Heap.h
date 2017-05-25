@@ -7,13 +7,13 @@ using std::vector;
 
 template <typename T>
 class Six_Heap {
-private:
+ private:
     vector<T> array;
     void ShiftUp(int index);
     void ShiftDown();
     int MinSoon(int index_parent);
 
-public:
+ public:
     void InsertElem(T e);
     void DeleteMin();
     T GetMin();

@@ -58,9 +58,9 @@ int main() {
         cin >> start_v;
         vector<int> min_ways;
 
-        if (select == 1) 
+        if (select == 1)
             min_ways = Dijkstra_RB_tree(start_v, vec);
-        else 
+        else
             min_ways = Dijkstra_Six_Heap(start_v, vec);
 
         cout << "\n---------------------------\n";
