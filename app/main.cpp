@@ -50,14 +50,23 @@ int main() {
         while (select < 1 || select > 2) {
             cin >> select;
             if (select < 1 || select > 2)
-                cout << "Incorrect input! Please repeat input:";
+                cout << "Select 1 or 2 algorithm:";
         }
 
         cout << "Start vertex: ";
-        int start_v;
-        cin >> start_v;
-        vector<int> min_ways;
+        int start_v = -1;
+        int check = vec.size();
+        while (start_v < 0 || start_v > check - 1) {
+            cin >> start_v;
+            if (start_v < 0 || start_v > check - 1) {
+                cout << "The vertex doesn't exist!\nThe graph has the following vertices:\n";
+                for (int i = 0; i < check; ++i)
+                    cout << i << ' ';
+                cout << "\nPlease repeat input:";
+            }              
+        }
 
+        vector<int> min_ways;
         if (select == 1)
             min_ways = Dijkstra_RB_tree(start_v, vec);
         else
@@ -67,7 +76,8 @@ int main() {
         cout << " Minimal way from vertex " << start_v << endl;
         int size = min_ways.size();
         for (int i = 0; i < size; ++i) {
-            cout << " to " << i << ": " << min_ways[i] << endl;
+            if (i != start_v)
+                cout << " to " << i << ": " << min_ways[i] << endl;
         }
         cout << "---------------------------\n\n";
     }
