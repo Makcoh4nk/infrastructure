@@ -63,7 +63,7 @@ int main() {
                 for (int i = 0; i < check; ++i)
                     cout << i << ' ';
                 cout << "\nPlease repeat input:";
-            }              
+            }
         }
 
         vector<int> min_ways;
