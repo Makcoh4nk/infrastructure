@@ -16,7 +16,8 @@ int main() {
     cin >> path;
     FILE* fp = fopen(path, "r");
     if (fp == 0) {
-        cout << "File cannot be opened!\n\n";
+        cout << "File can't be opened!\n\n";
+        return 0;
     } else {
         vector <vector <pair <int, int> > > vec;
         bool flag = 0;
@@ -80,5 +81,4 @@ int main() {
         }
         cout << "---------------------------\n\n";
     }
-    return 0;
 }
