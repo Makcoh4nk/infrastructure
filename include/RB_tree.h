@@ -262,8 +262,8 @@ RB_node<T>* RB_tree<T>::Find(T v) {
 template < typename T >
 void RB_tree<T>::Insert(T v) {
     if (root == nullptr) {
-        root = new RB_node<T>(v, nullptr, reinterpret_cast<RB_node<T>*>(NIL),
-            reinterpret_cast<RB_node<T>*>(NIL), BLACK);
+        root = new RB_node<T>(v, BLACK, reinterpret_cast<RB_node<T>*>(NIL),
+            reinterpret_cast<RB_node<T>*>(NIL), nullptr);
     } else {
         RB_node<T> *current = root;
         RB_node<T> *parent = nullptr;
