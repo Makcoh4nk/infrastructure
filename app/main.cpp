@@ -14,8 +14,7 @@ int main() {
     cout << "Path to file: ";
     char path[300];
     cin >> path;
-    FILE* fp;
-    fopen_s(&fp, path, "r");
+    FILE* fp = fopen(path, "r");
     if (fp == 0) {
         cout << "File cannot be opened!\n\n";
     } else {
