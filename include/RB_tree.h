@@ -32,19 +32,19 @@ extern RB_node<pair<int, int>> NIL_node;
 template <typename T>
 class RB_tree {
  private:
+    void InsertFixup(RB_node<T> *x);
     void Rotate_Left(RB_node<T> *x);
     void Rotate_Right(RB_node<T> *x);
-    void InsertFixup(RB_node<T> *x);
     void DeleteFixup(RB_node<T> *x);
 
  public:
+    RB_node<T> *root;
     RB_tree();
     ~RB_tree();
     void Insert(T x);
     void Delete(T x);
     void Delete(RB_node<T> *x);
     void DeleteMin();
-    RB_node<T> *root;
     RB_node<T>* Find(T x);
     T GetMin();
 
@@ -85,53 +85,42 @@ RB_tree<T>::~RB_tree() {
     }
 }
 
-/******* Tree Rotations *******/
+/******* INSERT *******/
 
-template <typename T>
-void RB_tree<T>::Rotate_Left(RB_node<T> *x) {
-    RB_node<T> *y = x->right;
-    x->right = y->left;
-    if (y->left != reinterpret_cast<RB_node<T>*>(NIL))
-        y->left->parent = x;
-    if (y != reinterpret_cast<RB_node<T>*>(NIL))
-        y->parent = x->parent;
-    if (x->parent != nullptr) {
-        if (x == x->parent->left)
-            x->parent->left = y;
-        else
-            x->parent->right = y;
+template < typename T >
+void RB_tree<T>::Insert(T key) {
+    if (root == nullptr) {
+        root = new RB_node<T>(key, BLACK, reinterpret_cast<RB_node<T>*>(NIL),
+            reinterpret_cast<RB_node<T>*>(NIL), nullptr);
     } else {
-        root = y;
-    }
-    y->left = x;
-    if (x != reinterpret_cast<RB_node<T>*>(NIL))
-        x->parent = y;
-}
+        RB_node<T> *current = root;
+        RB_node<T> *parent = nullptr;
 
-template <typename T>
-void RB_tree<T>::Rotate_Right(RB_node<T> *x) {
-    RB_node<T> *y = x->left;
-    x->left = y->right;
-    if (y->right != reinterpret_cast<RB_node<T>*>(NIL)) {
-        y->right->parent = x;
-    }
-    if (y != reinterpret_cast<RB_node<T>*>(NIL))
-        y->parent = x->parent;
-    if (x->parent != nullptr) {
-        if (x == x->parent->right) {
-            x->parent->right = y;
-        } else {
-            x->parent->left = y;
+        while (current != reinterpret_cast<RB_node<T>*>(NIL)) {
+            parent = current;
+            if (key < current->value) {
+                current = current->left;
+            } else {
+                current = current->right;
+            }
         }
-    } else {
-        root = y;
+
+        RB_node<T> *newnode = new RB_node<T>(key, RED, reinterpret_cast<RB_node<T>*>(NIL),
+            reinterpret_cast<RB_node<T>*>(NIL), parent);
+        if (parent == nullptr) {
+            root = newnode;
+        } else {
+            if (newnode->value < parent->value) {
+                parent->left = newnode;
+            } else {
+                parent->right = newnode;
+            }
+            InsertFixup(newnode);
+        }
     }
-    y->right = x;
-    if (x != reinterpret_cast<RB_node<T>*>(NIL))
-        x->parent = y;
 }
 
-/******* Insert FixUp *******/
+/******* INSERT FIXUP *******/
 
 template <typename T>
 void RB_tree<T>::InsertFixup(RB_node<T> *x) {
@@ -171,7 +160,129 @@ void RB_tree<T>::InsertFixup(RB_node<T> *x) {
     root->color = BLACK;
 }
 
-/******* Delete FixUp *******/
+/******* TREE ROTATIONS *******/
+
+template <typename T>
+void RB_tree<T>::Rotate_Right(RB_node<T> *x) {
+    RB_node<T> *y = x->left;
+    x->left = y->right;
+    if (y->right != reinterpret_cast<RB_node<T>*>(NIL)) {
+        y->right->parent = x;
+    }
+    if (y != reinterpret_cast<RB_node<T>*>(NIL))
+        y->parent = x->parent;
+    if (x->parent != nullptr) {
+        if (x == x->parent->right) {
+            x->parent->right = y;
+        } else {
+            x->parent->left = y;
+        }
+    } else {
+        root = y;
+    }
+    y->right = x;
+    if (x != reinterpret_cast<RB_node<T>*>(NIL))
+        x->parent = y;
+}
+
+template <typename T>
+void RB_tree<T>::Rotate_Left(RB_node<T> *x) {
+    RB_node<T> *y = x->right;
+    x->right = y->left;
+    if (y->left != reinterpret_cast<RB_node<T>*>(NIL))
+        y->left->parent = x;
+    if (y != reinterpret_cast<RB_node<T>*>(NIL))
+        y->parent = x->parent;
+    if (x->parent != nullptr) {
+        if (x == x->parent->left)
+            x->parent->left = y;
+        else
+            x->parent->right = y;
+    } else {
+        root = y;
+    }
+    y->left = x;
+    if (x != reinterpret_cast<RB_node<T>*>(NIL))
+        x->parent = y;
+}
+
+/******* DELETE(key) *******/
+
+template < typename T >
+void RB_tree<T>::Delete(T key) {
+    if (root != nullptr) {
+        RB_node<T> *x = Find(key);
+        Delete(x);
+    } else {
+        throw 1;
+    }
+}
+
+/******* DELETE MIN *******/
+
+template < typename T >
+void RB_tree<T>::DeleteMin() {
+    RB_node<T>* rootcopy = root;
+    if (rootcopy != nullptr) {
+        while (rootcopy->left != reinterpret_cast<RB_node<T>*>(NIL))
+            rootcopy = rootcopy->left;
+        Delete(rootcopy);
+    }
+}
+
+/******* DELETE(*node) *******/
+
+template < typename T >
+void RB_tree<T>::Delete(RB_node<T> *node) {
+    if (root != nullptr) {
+        RB_node<T> *x, *y;
+        if (node == nullptr || node == reinterpret_cast<RB_node<T>*>(NIL))
+            return;
+        if (node->left == reinterpret_cast<RB_node<T>*>(NIL) ||
+            node->right == reinterpret_cast<RB_node<T>*>(NIL)) {
+            y = node;
+        } else {
+            y = node->right;
+            while (y->left != reinterpret_cast<RB_node<T>*>(NIL)) {
+                y = y->left;
+            }
+        }
+
+        if (y->left != reinterpret_cast<RB_node<T>*>(NIL))
+            x = y->left;
+        else
+            x = y->right;
+        x->parent = y->parent;
+
+        if (y->parent != nullptr) {
+            if (y == y->parent->left)
+                y->parent->left = x;
+            else
+                y->parent->right = x;
+
+        } else {
+            root = x;
+        }
+
+        if (y != node) {
+            node->value = y->value;
+        }
+
+        if (y->color == BLACK) {
+            DeleteFixup(x);
+        }
+
+        if (y == root)
+            root = nullptr;
+        else
+            delete y;
+
+    } else {
+        throw 1;
+    }
+}
+
+/******* DELETE FIXUP *******/
 
 template < typename T >
 void RB_tree<T>::DeleteFixup(RB_node<T>* x) {
@@ -231,20 +342,20 @@ void RB_tree<T>::DeleteFixup(RB_node<T>* x) {
     x->color = BLACK;
 }
 
-/*****************************************/
+/******* FIND *******/
 
 template < typename T >
-RB_node<T>* RB_tree<T>::Find(T v) {
+RB_node<T>* RB_tree<T>::Find(T key) {
     if (root != nullptr && root != reinterpret_cast<RB_node<T>*>(NIL)) {
         RB_node<T> *current = root;
         while (true) {
             if (current == reinterpret_cast<RB_node<T>*>(NIL))
                 return nullptr;
 
-            if (current->value == v)
+            if (current->value == key)
                 return current;
 
-            if (v < current->value) {
+            if (key < current->value) {
                 if (current->left != nullptr)
                     current = current->left;
             } else {
@@ -257,118 +368,7 @@ RB_node<T>* RB_tree<T>::Find(T v) {
     }
 }
 
-/*****************************************/
-
-template < typename T >
-void RB_tree<T>::Insert(T v) {
-    if (root == nullptr) {
-        root = new RB_node<T>(v, BLACK, reinterpret_cast<RB_node<T>*>(NIL),
-            reinterpret_cast<RB_node<T>*>(NIL), nullptr);
-    } else {
-        RB_node<T> *current = root;
-        RB_node<T> *parent = nullptr;
-        RB_node<T> *newnode;
-
-        while (current != reinterpret_cast<RB_node<T>*>(NIL)) {
-            parent = current;
-            if (v < current->value) {
-                current = current->left;
-            } else {
-                current = current->right;
-            }
-        }
-        newnode = new RB_node<T>(v, RED, reinterpret_cast<RB_node<T>*>(NIL),
-            reinterpret_cast<RB_node<T>*>(NIL), parent);
-        if (parent == nullptr) {
-            root = newnode;
-        } else {
-            if (newnode->value < parent->value) {
-                parent->left = newnode;
-            } else {
-                parent->right = newnode;
-            }
-            InsertFixup(newnode);
-        }
-    }
-}
-
-/*****************************************/
-
-template < typename T >
-void RB_tree<T>::Delete(T v) {
-    if (root != nullptr) {
-        RB_node<T> *x = Find(v);
-        Delete(x);
-    } else {
-        throw 1;
-    }
-}
-
-/*****************************************/
-
-template < typename T >
-void RB_tree<T>::Delete(RB_node<T> *v) {
-    if (root != nullptr) {
-        RB_node<T> *x, *y;
-        if (v == nullptr || v == reinterpret_cast<RB_node<T>*>(NIL))
-            return;
-        if (v->left == reinterpret_cast<RB_node<T>*>(NIL) ||
-            v->right == reinterpret_cast<RB_node<T>*>(NIL)) {
-            y = v;
-        } else {
-            y = v->right;
-            while (y->left != reinterpret_cast<RB_node<T>*>(NIL)) {
-                y = y->left;
-            }
-        }
-
-        if (y->left != reinterpret_cast<RB_node<T>*>(NIL))
-            x = y->left;
-        else
-            x = y->right;
-        x->parent = y->parent;
-
-        if (y->parent != nullptr) {
-            if (y == y->parent->left)
-                y->parent->left = x;
-            else
-                y->parent->right = x;
-
-        } else {
-            root = x;
-        }
-
-        if (y != v) {
-            v->value = y->value;
-        }
-
-        if (y->color == BLACK) {
-            DeleteFixup(x);
-        }
-
-        if (y == root)
-            root = nullptr;
-        else
-            delete y;
-
-    } else {
-        throw 1;
-    }
-}
-
-/*****************************************/
-
-template < typename T >
-void RB_tree<T>::DeleteMin() {
-    RB_node<T>* rootcopy = root;
-    if (rootcopy != nullptr) {
-        while (rootcopy->left != reinterpret_cast<RB_node<T>*>(NIL))
-            rootcopy = rootcopy->left;
-        Delete(rootcopy);
-    }
-}
-
-/*****************************************/
+/******* GET MIN *******/
 
 template < typename T >
 T RB_tree<T>::GetMin() {

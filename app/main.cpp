@@ -32,10 +32,10 @@ int main() {
                     v = new vector<pair<int, int>>;
                 } else {
                     if (flag == 0) {
-                        p->second = ch - 48;
+                        p->first = ch - 49;
                         flag = 1;
                     } else {
-                        p->first = ch - 48;
+                        p->second = ch - 48;
                         flag = 0;
                         v->push_back(*p);
                         p = new pair<int, int>;
@@ -46,26 +46,27 @@ int main() {
 
         cout << "---------------------------\n"
             << "1 - RED-BLACK TREE\n2 - 6 - HEAP\nWhich algorithm do you want to use?: ";
-        int select = 0;
+        int select = 1;
         while (select < 1 || select > 2) {
-            cin >> select;
+    //      cin >> select;
             if (select < 1 || select > 2)
-                cout << "Select 1 or 2 algorithm:";
+                cout << "Select 1 or 2 algorithm: ";
         }
 
-        cout << "Start vertex: ";
-        int start_v = -1;
-        int check = vec.size();
-        while (start_v < 0 || start_v > check - 1) {
-            cin >> start_v;
-            if (start_v < 0 || start_v > check - 1) {
-                cout << "The vertex doesn't exist!\nThe graph has the following vertices:\n";
-                for (int i = 0; i < check; ++i)
-                    cout << i << ' ';
-                cout << "\nPlease repeat input:";
+        int start_v = 1;
+        int size = vec.size() + 1;
+        do {
+            cout << "\nThe graph has the following vertices:\n";
+            for (int i = 1; i < size; ++i)
+                cout << i << ' ';
+            cout << "\nSelect start vertex: ";
+   //       cin >> start_v;
+            if (start_v < 1 || start_v > size) {
+                cout << "Vertex doesn't exist!\nPlease repeat input\n";
             }
-        }
+        } while (start_v < 1 || start_v > size);
 
+        start_v--;
         vector<int> min_ways;
         if (select == 1)
             min_ways = Dijkstra_RB_tree(start_v, vec);
@@ -73,11 +74,16 @@ int main() {
             min_ways = Dijkstra_Six_Heap(start_v, vec);
 
         cout << "\n---------------------------\n";
-        cout << " Minimal way from vertex " << start_v << endl;
-        int size = min_ways.size();
+        cout << " Minimal ways:\n";
+        size = min_ways.size();
         for (int i = 0; i < size; ++i) {
-            if (i != start_v)
-                cout << " to " << i << ": " << min_ways[i] << endl;
+            if (i != start_v) {
+                cout << ' ' << start_v + 1 << " --> " << i + 1 << ": ";
+                    if (min_ways[i] != MAX)
+                        cout << min_ways[i] << endl;
+                    else
+                        cout << "Way doesn't exist!\n";
+            }
         }
         cout << "---------------------------\n\n";
     }

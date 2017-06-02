@@ -4,6 +4,8 @@
 #include "PriorityQueue.h"
 #include <vector>
 
+#define MAX 1000000
+
 using std::vector;
 
 vector<int> Dijkstra_Six_Heap(int start, vector <vector <pair <int, int> > > v);

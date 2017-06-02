@@ -5,12 +5,12 @@
 #include "RB_tree.h"
 
 template <typename T>
-class PriorityQueue_on_HEAP: public Six_Heap<T> {
- public:
+class PriorityQueue_on_RBT : public RB_tree<T> {
+public:
 };
 
 template <typename T>
-class PriorityQueue_on_RBT: public RB_tree<T> {
+class PriorityQueue_on_HEAP: public Six_Heap<T> {
  public:
 };
 

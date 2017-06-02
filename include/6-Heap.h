@@ -11,7 +11,7 @@ class Six_Heap {
     vector<T> array;
     void ShiftUp(int index);
     void ShiftDown();
-    int MinSoon(int index_parent);
+    int MinSon(int index_parent);
 
  public:
     void InsertElem(T e);
@@ -47,7 +47,7 @@ void Six_Heap<T>::ShiftUp(int index) {
 }
 
 template <typename T>
-int Six_Heap<T>::MinSoon(int index_parent) {
+int Six_Heap<T>::MinSon(int index_parent) {
     int i = 0;
     int index = 0;
 
@@ -71,14 +71,14 @@ template <typename T>
 void Six_Heap<T>::ShiftDown() {
     T tmp;
     int parent = 0;
-    int index_min_soon = MinSoon(0);
-    while (index_min_soon >= 0 && index_min_soon <= static_cast<int>(array.size()) - 1
-        && array[parent] > array[index_min_soon]) {
-        tmp = array[index_min_soon];
-        array[index_min_soon] = array[parent];
+    int index_min_son = MinSon(0);
+    while (index_min_son >= 0 && index_min_son <= static_cast<int>(array.size()) - 1
+        && array[parent] > array[index_min_son]) {
+        tmp = array[index_min_son];
+        array[index_min_son] = array[parent];
         array[parent] = tmp;
-        parent = index_min_soon;
-        index_min_soon = MinSoon(parent);
+        parent = index_min_son;
+        index_min_son = MinSon(parent);
     }
 }
 
