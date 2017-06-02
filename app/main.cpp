@@ -60,7 +60,7 @@ int main() {
             for (int i = 1; i < size; ++i)
                 cout << i << ' ';
             cout << "\nSelect start vertex: ";
-   //       cin >> start_v;
+//          cin >> start_v;
             if (start_v < 1 || start_v > size) {
                 cout << "Vertex doesn't exist!\nPlease repeat input\n";
             }

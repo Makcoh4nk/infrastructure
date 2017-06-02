@@ -6,7 +6,7 @@
 
 template <typename T>
 class PriorityQueue_on_RBT : public RB_tree<T> {
-public:
+ public:
 };
 
 template <typename T>
