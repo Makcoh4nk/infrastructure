@@ -17,7 +17,7 @@ int main() {
     char path_to_file_Prim[150] = 
         "C:\\Users\\HP\\Desktop\\tmp\\infrastructure\\Prim.txt";
     int count_v = 0;
-    int select = 1;   //Set 1 to Prim's algorithm or 2 to Kruskal's algorithm
+    int select = 1;   // Set 1 to Prim's algorithm or 2 to Kruskal's algorithm
 
     switch (select) {
     case 1:
@@ -25,7 +25,7 @@ int main() {
         cout << "Path to file: " << path_to_file_Kruskal << endl;
         Adjacency_Matrix = Reading_the_matrix(path_to_file_Kruskal);
         count_v = Adjacency_Matrix[0].size();
-        graph = Init_graph_from_adjacency_matrix(Adjacency_Matrix);
+        graph = Init_graph_Adjacency_matrix(Adjacency_Matrix);
         spanning_tree = Kruskal(graph, count_v);
         break;
 
@@ -34,7 +34,7 @@ int main() {
         cout << "Path to file: " << path_to_file_Prim << endl;
         Incidence_Matrix = Reading_the_matrix(path_to_file_Prim);
         count_v = Incidence_Matrix[0].size();
-        graph = Init_graph_from_incidence_matrix(Incidence_Matrix);
+        graph = Init_graph_Incidence_matrix(Incidence_Matrix);
         spanning_tree = Prim(graph, count_v);
         break;
     }

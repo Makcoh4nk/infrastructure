@@ -2,11 +2,7 @@
 
 UnionFind::UnionFind() {}
 
-UnionFind::UnionFind(int size) {
-    v = vector<int>(size);
-    for (int i = 0; i < size; ++i)
-        v[i] = i;
-}
+UnionFind::UnionFind(int size) 
 
 UnionFind::~UnionFind() {}
 

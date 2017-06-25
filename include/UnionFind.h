@@ -12,8 +12,14 @@ class UnionFind {
     vector<int> v;
  public:
     UnionFind();
-    UnionFind(int size);
     ~UnionFind();
+
+    explicit UnionFind(int size) {
+        v = vector<int>(size);
+        for (int i = 0; i < size; ++i)
+            v[i] = i;
+    }
+
     void Union(int elem, int parent);
     int Find(int a);
 

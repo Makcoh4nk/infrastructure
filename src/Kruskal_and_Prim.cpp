@@ -31,7 +31,7 @@ vector<tuple<int, int, int>>
     return spanning_tree;
 }
 
-vector<tuple<int, int, int>> 
+vector<tuple<int, int, int>>
     Prim(vector<tuple<int, int, int>> graph, int count_v) {
     vector<tuple<int, int, int>> spanning_tree;
     PriorityQueue<tuple<int, int, int>> pq;

@@ -13,4 +13,4 @@ vector<tuple<int, int, int>> Init_graph_Adjacency_matrix(vector<vector<int>>);
 vector<tuple<int, int, int>> Init_graph_Incidence_matrix(vector<vector<int>>);
 void Graphviz(vector<tuple<int, int, int>>, vector<tuple<int, int, int>>);
 
-#endif // INCLUDE_VISUAL_H_
+#endif  // INCLUDE_VISUAL_H_

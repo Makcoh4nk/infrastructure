@@ -24,7 +24,7 @@ vector<vector<int>> Reading_the_matrix(char* path) {
     return graph;
 }
 
-vector<tuple<int, int, int>> 
+vector<tuple<int, int, int>>
     Init_graph_Incidence_matrix(vector<vector<int>> m) {
     vector<tuple<int, int, int>> graph;
     int column_size = m.size();
@@ -46,7 +46,7 @@ vector<tuple<int, int, int>>
     return graph;
 }
 
-vector<tuple<int, int, int>> 
+vector<tuple<int, int, int>>
     Init_graph_Adjacency_matrix(vector<vector<int>> m) {
     vector<tuple<int, int, int>> graph;
     int column_size = m.size();
@@ -60,9 +60,9 @@ vector<tuple<int, int, int>>
     return graph;
 }
 
-void Graphviz(vector<tuple<int, int, int>> graph, 
+void Graphviz(vector<tuple<int, int, int>> graph,
               vector<tuple<int, int, int>> spanning_tree) {
-    FILE* f = 
+    FILE* f =
         fopen("C:/Users/HP/Desktop/tmp/infrastructure/Graphviz.txt", "w");
     if (f == 0)
         throw std::logic_error("Error! Can`t open the file!");
