@@ -24,7 +24,8 @@ vector<vector<int>> Reading_the_matrix(char* path) {
     return graph;
 }
 
-vector<tuple<int, int, int>> Init_graph_from_incidence_matrix(vector<vector<int>> m) {
+vector<tuple<int, int, int>> 
+    Init_graph_Incidence_matrix(vector<vector<int>> m) {
     vector<tuple<int, int, int>> graph;
     int column_size = m.size();
     int string_size = m[1].size();
@@ -45,7 +46,8 @@ vector<tuple<int, int, int>> Init_graph_from_incidence_matrix(vector<vector<int>
     return graph;
 }
 
-vector<tuple<int, int, int>> Init_graph_from_adjacency_matrix(vector<vector<int>> m) {
+vector<tuple<int, int, int>> 
+    Init_graph_Adjacency_matrix(vector<vector<int>> m) {
     vector<tuple<int, int, int>> graph;
     int column_size = m.size();
     int string_size = m[1].size();
@@ -58,8 +60,10 @@ vector<tuple<int, int, int>> Init_graph_from_adjacency_matrix(vector<vector<int>
     return graph;
 }
 
-void Graphviz(vector<tuple<int,int,int>> graph, vector<tuple<int, int, int>> spanning_tree) {
-    FILE* f = fopen("C:/Users/HP/Desktop/tmp/infrastructure/Graphviz.txt", "w");
+void Graphviz(vector<tuple<int, int, int>> graph, 
+              vector<tuple<int, int, int>> spanning_tree) {
+    FILE* f = 
+        fopen("C:/Users/HP/Desktop/tmp/infrastructure/Graphviz.txt", "w");
     if (f == 0)
         throw std::logic_error("Error! Can`t open the file!");
 

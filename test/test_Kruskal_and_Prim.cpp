@@ -8,7 +8,7 @@ TEST(Kruskal, CorrectAlgorithm) {
     graph.push_back(make_tuple(5, 0, 1));
     graph.push_back(make_tuple(8, 0, 2));
     graph.push_back(make_tuple(9, 1, 5));
-    graph.push_back(make_tuple(4, 2, 5)); 
+    graph.push_back(make_tuple(4, 2, 5));
     graph.push_back(make_tuple(2, 2, 6));
     graph.push_back(make_tuple(12, 1, 3));
     graph.push_back(make_tuple(6, 3, 5));

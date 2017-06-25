@@ -9,6 +9,6 @@
 using std::tuple;
 
 vector<tuple<int, int, int>> Kruskal(vector<tuple<int, int, int>>, int);
-vector<tuple<int, int, int>> Prim(vector<tuple<int,int,int>>, int);
+vector<tuple<int, int, int>> Prim(vector<tuple<int, int, int>>, int);
 
 #endif  // INCLUDE_KRUSKAL_AND_PRIM_H_

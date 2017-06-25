@@ -12,10 +12,10 @@ class UnionFind {
     vector<int> v;
  public:
     UnionFind();
-    UnionFind(int);
+    UnionFind(int size);
     ~UnionFind();
-    void Union(int, int);
-    int Find(int);
+    void Union(int elem, int parent);
+    int Find(int a);
 
     int operator[](int index) {
         return v[index];

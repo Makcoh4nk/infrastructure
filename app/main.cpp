@@ -12,14 +12,16 @@ int main() {
     vector<tuple<int, int, int>> spanning_tree;
     vector<vector<int>> Adjacency_Matrix;
     vector<vector<int>> Incidence_Matrix;
-    char path_to_file_Kruskal[150] = "C:\\Users\\HP\\Desktop\\tmp\\infrastructure\\Kruskal.txt";
-    char path_to_file_Prim[150] = "C:\\Users\\HP\\Desktop\\tmp\\infrastructure\\Prim.txt";
+    char path_to_file_Kruskal[150] = 
+        "C:\\Users\\HP\\Desktop\\tmp\\infrastructure\\Kruskal.txt";
+    char path_to_file_Prim[150] = 
+        "C:\\Users\\HP\\Desktop\\tmp\\infrastructure\\Prim.txt";
     int count_v = 0;
-    int select = 2;                //Set 1 to Prim's algorithm or 2 to Kruskal's algorithm
+    int select = 1;   //Set 1 to Prim's algorithm or 2 to Kruskal's algorithm
 
     switch (select) {
-    case 1: 
-        cout << "KRUSKAL`S ALGORITHM\n";        
+    case 1:
+        cout << "KRUSKAL`S ALGORITHM\n";
         cout << "Path to file: " << path_to_file_Kruskal << endl;
         Adjacency_Matrix = Reading_the_matrix(path_to_file_Kruskal);
         count_v = Adjacency_Matrix[0].size();
@@ -27,7 +29,7 @@ int main() {
         spanning_tree = Kruskal(graph, count_v);
         break;
 
-    case 2: 
+    case 2:
         cout << "PRIM`S ALGORITHM\n";
         cout << "Path to file: " << path_to_file_Prim << endl;
         Incidence_Matrix = Reading_the_matrix(path_to_file_Prim);
@@ -37,6 +39,6 @@ int main() {
         break;
     }
     Graphviz(graph, spanning_tree);
-    cout << "\n************\n* SUCCESS! *\n************\n\n"
-        << "Open file: C:/Users/HP/Desktop/tmp/infrastructure/Graphviz.txt\n" << endl;
+    cout << "\n************\n* SUCCESS! *\n************\n\n" <<
+        "Open file: C:/Users/HP/Desktop/tmp/infrastructure/Graphviz.txt\n\n";
 }

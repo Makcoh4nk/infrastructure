@@ -52,15 +52,16 @@ template <typename T>
 int Five_Heap<T>::MinSon(int index_parent) {
     int i = 0;
     int index = 0;
+    int size = array.size();
 
-    if (5 * index_parent + 1 < static_cast<int>(array.size())) {
+    if (5 * index_parent + 1 < size) {
         i = 5 * index_parent + 1;
     } else {
         return -1;
     }
 
     index = i;
-    while (i + 1 < static_cast<int>(array.size()) && i <= 5 * index_parent + 5) {
+    while (i + 1 < size && i <= 5 * index_parent + 5) {
         if (array[index] > array[i + 1]) {
             index = i + 1;
         }
@@ -74,8 +75,9 @@ void Five_Heap<T>::ShiftDown() {
     T tmp;
     int parent = 0;
     int index_min_son = MinSon(0);
-    while (index_min_son >= 0 && index_min_son <= static_cast<int>(array.size()) - 1
-        && array[parent] > array[index_min_son]) {
+    int size = array.size();
+    while ((index_min_son >= 0) && (index_min_son + 1 <= size)
+        && (array[parent] > array[index_min_son])) {
         tmp = array[index_min_son];
         array[index_min_son] = array[parent];
         array[parent] = tmp;
