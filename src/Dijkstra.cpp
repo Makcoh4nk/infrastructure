@@ -1,6 +1,6 @@
 #include "Dijkstra.h"
 
-vector<int> Dijkstra_RB_tree(int start, vector <vector <pair <int, int> > > v) {
+vector<int> Dijkstra_RB_tree(int start, vector<vector<pair <int, int>>> v) {
     vector <bool> visited(v.size(), false);
     vector <int> distance(v.size(), MAX);
     PriorityQueue_on_RBT <pair <int, int> > pq;
@@ -26,7 +26,7 @@ vector<int> Dijkstra_RB_tree(int start, vector <vector <pair <int, int> > > v) {
     return distance;
 }
 
-vector<int> Dijkstra_Six_Heap(int start, vector <vector <pair <int, int> > > v) {
+vector<int> Dijkstra_Six_Heap(int start, vector<vector<pair<int, int>>> v) {
     vector <bool> visited(v.size(), false);
     vector <int> distance(v.size(), MAX);
     distance[start] = 0;

@@ -11,9 +11,9 @@ using std::cout;
 using std::endl;
 
 int main() {
-    cout << "Path to file: ";
-    char path[300];
-    cin >> path;
+    cout << "Path to file: " <<
+        "C:\\Users\\HP\\Desktop\\tmp\\infrastructure\\Graph.txt\n";
+    char path[300] = "C:/Users/HP/Desktop/tmp/infrastructure/Graph.txt";
     FILE* fp = fopen(path, "r");
     if (fp == 0) {
         cout << "File can't be opened!\n\n";
@@ -44,11 +44,12 @@ int main() {
             }
         }
 
-        cout << "---------------------------\n"
-            << "1 - RED-BLACK TREE\n2 - 6 - HEAP\nWhich algorithm do you want to use?: ";
+       cout << "---------------------------\n1 - RED-BLACK TREE\n"
+           << "2 - 6 - HEAP\n---------------------------\n"
+           << "Which algorithm do you want to use?: 1\n";
         int select = 1;
         while (select < 1 || select > 2) {
-    //      cin >> select;
+//      cin >> select;
             if (select < 1 || select > 2)
                 cout << "Select 1 or 2 algorithm: ";
         }
@@ -59,7 +60,7 @@ int main() {
             cout << "\nThe graph has the following vertices:\n";
             for (int i = 1; i < size; ++i)
                 cout << i << ' ';
-            cout << "\nSelect start vertex: ";
+            cout << "\nSelect start vertex: 1";
 //          cin >> start_v;
             if (start_v < 1 || start_v > size) {
                 cout << "Vertex doesn't exist!\nPlease repeat input\n";

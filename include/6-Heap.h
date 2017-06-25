@@ -17,17 +17,10 @@ class Six_Heap {
     void InsertElem(T e);
     void DeleteMin();
     T GetMin();
-    T operator[](int index);
-
-    bool IsEmpty() {
-        return array.empty();
-    }
-
-    int Size() {
-        return array.size();
-    }
+    T operator[](int index) { return array[index]; }
+    bool IsEmpty() { return array.empty(); }
+    int GetSize() { return array.size(); }
 };
-
 
 template <typename T>
 void Six_Heap<T>::InsertElem(T e) {
@@ -84,7 +77,7 @@ void Six_Heap<T>::ShiftDown() {
 
 template <typename T>
 void Six_Heap<T>::DeleteMin() {
-    if (Size() != 0) {
+    if (GetSize() != 0) {
         array[0] = array[array.size() - 1];
         array.pop_back();
         ShiftDown();
@@ -95,16 +88,9 @@ void Six_Heap<T>::DeleteMin() {
 
 template <typename T>
 T Six_Heap<T>::GetMin() {
-    if (static_cast<int>(array.size()) != 0) {
-        return array[0];
-    } else {
+    if (static_cast<int>(array.size()) == 0)
         throw 1;
-    }
-}
-
-template <typename T>
-T Six_Heap<T>::operator[](int index) {
-    return array[index];
+    return array[0];
 }
 
 #endif  // INCLUDE_6_HEAP_H_

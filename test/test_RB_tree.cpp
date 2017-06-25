@@ -4,7 +4,7 @@
 using std::pair;
 using std::vector;
 
-TEST(RB_tree, CanInsertInEmptyTree) {
+TEST(RB_tree, CanInsertIntoEmptyTree) {
     RB_tree <int> t;
     int v = 2;
     t.Insert(v);
@@ -15,7 +15,7 @@ TEST(RB_tree, CanInsertInEmptyTree) {
     EXPECT_EQ(t.root->value, v);
 }
 
-TEST(RB_tree, CanInsertInNOTEmptyTree) {
+TEST(RB_tree, CanInsertIntoNotEmptyTree) {
     RB_tree <int> t;
     t.Insert(2);
     t.Insert(3);
@@ -67,13 +67,13 @@ TEST(RB_tree, CanDeleteForValueInTree) {
     EXPECT_EQ(res, nullptr);
 }
 
-TEST(RB_tree, ThrowWhenDeleteInEmptyTree) {
+TEST(RB_tree, ThrowWhenDeleteFromEmptyTree) {
     RB_tree<int> t;
 
     ASSERT_ANY_THROW(t.Delete(6));
 }
 
-TEST(RB_tree, CanDeleteForAdressInTree) {
+TEST(RB_tree, CanDeleteForAddressInTree) {
     RB_node<int>* res = nullptr;
     RB_tree<int> t;
     t.Insert(2);

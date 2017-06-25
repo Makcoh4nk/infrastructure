@@ -91,5 +91,5 @@ TEST(Six_Heap, CanCorrectGetSize) {
     actual.InsertElem(4);
     actual.InsertElem(7);
 
-    EXPECT_EQ(8, actual.Size());
+    EXPECT_EQ(8, actual.GetSize());
 }

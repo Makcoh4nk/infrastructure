@@ -33,7 +33,7 @@ TEST(Dijkstra, correct_algorithm_HEAP) {
 
 TEST(Dijkstra, correct_algorithm_TREE) {
     auto graph = InitTestGraph();
-    vector<int> expect_ways = { 0,  4, 6, 5, 8, 6, 8 };
+    vector<int> expect_ways = { 0, 4, 6, 5, 8, 6, 8 };
     vector<int> actual_ways = Dijkstra_RB_tree(0, graph);
     EXPECT_EQ(actual_ways, expect_ways);
 }
