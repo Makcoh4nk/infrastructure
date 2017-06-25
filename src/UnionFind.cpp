@@ -2,8 +2,6 @@
 
 UnionFind::UnionFind() {}
 
-UnionFind::UnionFind(int size) 
-
 UnionFind::~UnionFind() {}
 
 void UnionFind::Union(int elem, int parent) {

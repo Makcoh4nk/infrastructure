@@ -12,9 +12,9 @@ int main() {
     vector<tuple<int, int, int>> spanning_tree;
     vector<vector<int>> Adjacency_Matrix;
     vector<vector<int>> Incidence_Matrix;
-    char path_to_file_Kruskal[150] = 
+    char path_to_file_Kruskal[150] =
         "C:\\Users\\HP\\Desktop\\tmp\\infrastructure\\Kruskal.txt";
-    char path_to_file_Prim[150] = 
+    char path_to_file_Prim[150] =
         "C:\\Users\\HP\\Desktop\\tmp\\infrastructure\\Prim.txt";
     int count_v = 0;
     int select = 1;   // Set 1 to Prim's algorithm or 2 to Kruskal's algorithm
