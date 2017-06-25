@@ -1,95 +1,94 @@
-#include <Visual.h>
+#include "Visual.h"
 
-void vis_graph_mi(vector<vector<int>> graph, vector<vector<int>> ostov) {
-    FILE* fp;
-    fopen_s(&fp,"C:\\Users\\%username%\\Desktop\\graph1.gv", "w");
+using std::get;
 
-    fprintf(fp, "graph ostov {\n");
-    fprintf(fp, "\tnode[shape=circle];\n");
-    fprintf(fp, "\tedge[color=red];\n");
-    vector <tuple<int, int, int>> edge_ostov;
-    for (unsigned int i = 0; i < ostov.size(); ++i) {
-        tuple<int, int, int> a = EDGE(ostov[i]);
-        edge_ostov.push_back(a);
-    }
-
-    for (auto it = edge_ostov.begin(); it < edge_ostov.end(); ++it) {
-        fprintf(fp, "\tedge[label=%d];\n", std::get<0>((*it)));
-        fprintf(fp, "\t%d -- %d;\n", std::get<1>((*it)), std::get<2>((*it)));
-    }
-
-    fprintf(fp, "\tnode[shape=circle];\n");
-    fprintf(fp, "\tedge[color=blue];\n");
-
-    vector <tuple<int, int, int>> edge_ishod;
-    for (auto it = graph.begin(); it < graph.end(); ++it) {
-        bool flag = false;
-        tuple<int, int, int> a = EDGE(*it);
-        for (auto it1 = edge_ostov.begin(); it1 < edge_ostov.end(); ++it1) {
-            if ((*it1) == a) {
-                flag = true;
+vector<vector<int>> Reading_the_matrix(char* path) {
+    FILE* f = fopen(path, "r");
+    if (f == 0)
+        throw std::logic_error("Error! Can`t open the file!");
+    vector<vector<int>> graph;
+    int ch = 0;
+    vector<int>* v = new vector<int>;
+    while ((ch = fgetc(f)) != EOF) {
+        if (ch != ' ') {
+            if (ch == '\n') {
+                graph.push_back(*v);
+                v = new vector<int>;
+            } else {
+                v->push_back(ch - 48);
             }
         }
-        if (flag == false) {
-            edge_ishod.push_back(a);
-        }
     }
-    for (auto it = edge_ishod.begin(); it < edge_ishod.end(); it++) {
-        fprintf(fp, "\tedge[label=%d];\n", std::get<0>((*it)));
-        fprintf(fp, "\t%d -- %d;\n", std::get<1>((*it)), std::get<2>((*it)));
-    }
-    fprintf(fp, "}");
-    fclose(fp);
+    graph.push_back(*v);
+    fclose(f);
+    return graph;
 }
 
-void  vis_graph_ms(vector<vector<int>> graph, vector<vector<int>> ostov) {
-    FILE* fp;
-    fopen_s(&fp, "C:\\Users\\%username%\\Desktop\\graph2.gv", "w");
+vector<tuple<int, int, int>> Init_graph_from_incidence_matrix(vector<vector<int>> m) {
+    vector<tuple<int, int, int>> graph;
+    int column_size = m.size();
+    int string_size = m[1].size();
+    int weight = 0, v1 = 0, v2 = 0;
 
-    fprintf(fp, "graph ostov {\n");
-    fprintf(fp, "\tnode[shape=circle];\n");
-    fprintf(fp, "\tedge[color=red];\n");
-
-    vector <tuple<int, int, int >> edge_ostov;
-
-    for (unsigned int i = 0; i < ostov.size(); ++i) {
-        for (unsigned int j = 0; j < ostov[i].size(); ++j) {
-            if (ostov[i][j] != MAX && ostov[i][j] > 0) {
-                edge_ostov.push_back(std::make_tuple(ostov[i][j], i, i + j));
+    for (int i = 0; i < column_size; ++i) {
+        for (int j = 0, k = 0; j < string_size && k < 2; ++j)
+            if (m[i][j] != 0) {
+                weight = m[i][j];
+                if (k == 0)
+                    v1 = j;
+                else
+                    v2 = j;
+                k++;
             }
-        }
+        graph.push_back(std::make_tuple(weight, v1, v2));
+    }
+    return graph;
+}
+
+vector<tuple<int, int, int>> Init_graph_from_adjacency_matrix(vector<vector<int>> m) {
+    vector<tuple<int, int, int>> graph;
+    int column_size = m.size();
+    int string_size = m[1].size();
+
+    for (int i = 0; i < column_size; ++i) {
+        for (int j = i + 1; j < string_size; ++j)
+            if (m[i][j] != 0)
+                graph.push_back(std::make_tuple(m[i][j], i, j));
+    }
+    return graph;
+}
+
+void Graphviz(vector<tuple<int,int,int>> graph, vector<tuple<int, int, int>> spanning_tree) {
+    FILE* f = fopen("C:/Users/HP/Desktop/tmp/infrastructure/Graphviz.txt", "w");
+    if (f == 0)
+        throw std::logic_error("Error! Can`t open the file!");
+
+    int size_s_t = spanning_tree.size();
+    int size_gr = graph.size();
+    vector<bool> drawn(size_gr, false);
+
+    fputs("graph {\n", f);
+    for (int i = 0; i < size_s_t; ++i) {
+        for (int j = 0; j < size_gr; ++j)
+            if (spanning_tree[i] == graph[j])
+                drawn[j] = true;
+        fputc(get<1>(spanning_tree[i]) + 49, f);
+        fputs("--", f);
+        fputc(get<2>(spanning_tree[i]) + 49, f);
+        fputs("[color = dodgerblue2, style = \"bold\", label=\"", f);
+        fputc(get<0>(spanning_tree[i]) + 48, f);
+        fputs("\"]\n", f);
     }
 
-    for (auto it = edge_ostov.begin(); it < edge_ostov.end(); ++it) {
-        fprintf(fp, "\tedge[label=%d];\n", std::get<0>((*it)));
-        fprintf(fp, "\t%d -- %d;\n", std::get<1>((*it)), std::get<2>((*it)));
+    for (int i = 0; i < size_gr; ++i) {
+        if (drawn[i]) continue;
+        fputc(std::get<1>(graph[i]) + 49, f);
+        fputs("--", f);
+        fputc(std::get<2>(graph[i]) + 49, f);
+        fputs("[color = black, label=\"", f);
+        fputc(std::get<0>(graph[i]) + 48, f);
+        fputs("\"]\n", f);
     }
-
-    fprintf(fp, "\tnode[shape=circle];\n");
-    fprintf(fp, "\tedge[color=blue];\n");
-
-    vector <tuple<int, int, int>> edge_ishod;
-
-    for (unsigned int i = 0; i < graph.size(); ++i) {
-        for (unsigned int j = 0; j < graph[i].size(); ++j) {
-            if (graph[i][j] != MAX && graph[i][j] > 0) {
-                tuple<int, int, int> a = std::make_tuple(graph[i][j], i, i + j);
-                bool flag = false;
-                for (auto it = edge_ostov.begin(); it < edge_ostov.end(); ++it) {
-                    if ((*it) == a) {
-                        flag = true;
-                    }
-                }
-                if (flag == false) {
-                    edge_ishod.push_back(a);
-                }
-            }
-        }
-    }
-    for (auto it = edge_ishod.begin(); it < edge_ishod.end(); it++) {
-        fprintf(fp, "\tedge[label=%d];\n", std::get<0>((*it)));
-        fprintf(fp, "\t%d -- %d;\n", std::get<1>((*it)), std::get<2>((*it)));
-    }
-    fprintf(fp, "}");
-    fclose(fp);
+    fputs("}\n", f);
+    fclose(f);
 }

@@ -7,27 +7,29 @@ using std::vector;
 
 template <typename T>
 class Five_Heap {
-private:
+ private:
     vector<T> array;
     void ShiftUp(int index);
     void ShiftDown();
-    int MinSoon(int index_parent);
+    int MinSon(int index_parent);
 
-public:
+ public:
     void InsertElem(T e);
     void DeleteMin();
     T GetMin();
-    T operator[](int index);
 
     bool IsEmpty() {
         return array.empty();
     }
 
-    int Size() {
+    int GetSize() {
         return array.size();
     }
-};
 
+    T operator[](int index) {
+        return array[index];
+    }
+};
 
 template <typename T>
 void Five_Heap<T>::InsertElem(T e) {
@@ -47,7 +49,7 @@ void Five_Heap<T>::ShiftUp(int index) {
 }
 
 template <typename T>
-int Five_Heap<T>::MinSoon(int index_parent) {
+int Five_Heap<T>::MinSon(int index_parent) {
     int i = 0;
     int index = 0;
 
@@ -71,25 +73,25 @@ template <typename T>
 void Five_Heap<T>::ShiftDown() {
     T tmp;
     int parent = 0;
-    int index_min_soon = MinSoon(0);
-    while (index_min_soon >= 0 && index_min_soon <= static_cast<int>(array.size()) - 1
-        && array[parent] > array[index_min_soon]) {
-        tmp = array[index_min_soon];
-        array[index_min_soon] = array[parent];
+    int index_min_son = MinSon(0);
+    while (index_min_son >= 0 && index_min_son <= static_cast<int>(array.size()) - 1
+        && array[parent] > array[index_min_son]) {
+        tmp = array[index_min_son];
+        array[index_min_son] = array[parent];
         array[parent] = tmp;
-        parent = index_min_soon;
-        index_min_soon = MinSoon(parent);
+        parent = index_min_son;
+        index_min_son = MinSon(parent);
     }
 }
 
 template <typename T>
 void Five_Heap<T>::DeleteMin() {
-    if (Size() != 0) {
+    if (GetSize() != 0) {
         array[0] = array[array.size() - 1];
         array.pop_back();
         ShiftDown();
     } else {
-        throw 1;
+        throw std::logic_error("Out of range");
     }
 }
 
@@ -98,13 +100,8 @@ T Five_Heap<T>::GetMin() {
     if (static_cast<int>(array.size()) != 0) {
         return array[0];
     } else {
-        throw 1;
+        throw  std::logic_error("Out of range");
     }
-}
-
-template <typename T>
-T Five_Heap<T>::operator[](int index) {
-    return array[index];
 }
 
 #endif  // INCLUDE_5_HEAP_H_

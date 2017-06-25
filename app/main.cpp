@@ -1,96 +1,42 @@
 #include "Visual.h"
 #include <iostream>
+#include <stdio.h>
+#include <time.h>
 
+using std::cin;
 using std::cout;
 using std::endl;
 
 int main() {
-    /*vector<vector<int>> graph;
+    vector<tuple<int, int, int>> graph;
+    vector<tuple<int, int, int>> spanning_tree;
+    vector<vector<int>> Adjacency_Matrix;
+    vector<vector<int>> Incidence_Matrix;
+    char path_to_file_Kruskal[150] = "C:\\Users\\HP\\Desktop\\tmp\\infrastructure\\Kruskal.txt";
+    char path_to_file_Prim[150] = "C:\\Users\\HP\\Desktop\\tmp\\infrastructure\\Prim.txt";
+    int count_v = 0;
+    int select = 2;                //Set 1 to Prim's algorithm or 2 to Kruskal's algorithm
 
-    vector<int> edge1;
-    edge1.push_back(1);
-    edge1.push_back(1);
-    edge1.push_back(0);
-    edge1.push_back(0);
-    edge1.push_back(0);
+    switch (select) {
+    case 1: 
+        cout << "KRUSKAL`S ALGORITHM\n";        
+        cout << "Path to file: " << path_to_file_Kruskal << endl;
+        Adjacency_Matrix = Reading_the_matrix(path_to_file_Kruskal);
+        count_v = Adjacency_Matrix[0].size();
+        graph = Init_graph_from_adjacency_matrix(Adjacency_Matrix);
+        spanning_tree = Kruskal(graph, count_v);
+        break;
 
-    graph.push_back(edge1);
-
-    vector<int> edge2;
-    edge2.push_back(1);
-    edge2.push_back(0);
-    edge2.push_back(1);
-    edge2.push_back(0);
-    edge2.push_back(0);
-
-    graph.push_back(edge2);
-
-    vector<int> edge3;
-    edge3.push_back(1);
-    edge3.push_back(0);
-    edge3.push_back(0);
-    edge3.push_back(1);
-    edge3.push_back(0);
-
-    graph.push_back(edge3);
-
-    vector<int> edge4;
-    edge4.push_back(1);
-    edge4.push_back(0);
-    edge4.push_back(0);
-    edge4.push_back(0);
-    edge4.push_back(1);
-
-    graph.push_back(edge4);
-
-    vector<int> edge5;
-    edge5.push_back(0);
-    edge5.push_back(0);
-    edge5.push_back(0);
-    edge5.push_back(1);
-    edge5.push_back(1);
-
-    graph.push_back(edge5);
-
-    vector <vector <int> > ostov = Prim(graph);
-    vis_graph_ms(graph, ostov);*/
-
-    vector<vector<int>> graph;
-    vector< int > edg1;
-    edg1.push_back(0);
-    edg1.push_back(3);
-    edg1.push_back(2);
-    edg1.push_back(1);
-    edg1.push_back(0);
-
-    graph.push_back(edg1);
-
-    vector< int > edg2;
-    edg2.push_back(0);
-    edg2.push_back(8);
-    edg2.push_back(0);
-    edg2.push_back(0);
-
-    graph.push_back(edg2);
-
-    vector< int > edg3;
-    edg3.push_back(0);
-    edg3.push_back(5);
-    edg3.push_back(4);
-
-    graph.push_back(edg3);
-
-    vector< int > edg4;
-    edg4.push_back(0);
-    edg4.push_back(0);
-
-    graph.push_back(edg4);
-
-    vector< int > edg5;
-    edg5.push_back(0);
-
-    graph.push_back(edg5);
-
-    vector <vector <int> > ostov = Kruskal(graph);
-    vis_graph_ms(graph, ostov);
+    case 2: 
+        cout << "PRIM`S ALGORITHM\n";
+        cout << "Path to file: " << path_to_file_Prim << endl;
+        Incidence_Matrix = Reading_the_matrix(path_to_file_Prim);
+        count_v = Incidence_Matrix[0].size();
+        graph = Init_graph_from_incidence_matrix(Incidence_Matrix);
+        spanning_tree = Prim(graph, count_v);
+        break;
+    }
+    Graphviz(graph, spanning_tree);
+    cout << "\n************\n* SUCCESS! *\n************\n\n"
+        << "Open file: C:/Users/HP/Desktop/tmp/infrastructure/Graphviz.txt\n" << endl;
 }

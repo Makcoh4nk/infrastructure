@@ -1,0 +1,9 @@
+graph {
+1--2[color = dodgerblue2, style = "bold", label="6"]
+2--5[color = dodgerblue2, style = "bold", label="2"]
+2--4[color = dodgerblue2, style = "bold", label="4"]
+3--4[color = dodgerblue2, style = "bold", label="3"]
+1--5[color = black, label="7"]
+2--3[color = black, label="5"]
+4--5[color = black, label="5"]
+}
