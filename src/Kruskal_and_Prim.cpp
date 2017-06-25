@@ -27,7 +27,7 @@ vector<tuple<int, int, int>>
         }
     }
     if (i < count_v - 1)
-        throw logic_error("Graph is disconnected!");
+        throw 1;
     return spanning_tree;
 }
 
@@ -60,7 +60,7 @@ vector<tuple<int, int, int>>
             else
                 v = get<1>(min_edge);
         } else {
-            throw logic_error("Graph is disconnected!");
+            throw 1;
         }
     }
     return spanning_tree;

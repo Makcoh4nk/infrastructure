@@ -12,7 +12,7 @@ void UnionFind::Union(int elem, int parent) {
 
 int UnionFind::Find(int a) {
     if (a > v.size())
-        throw std::logic_error("Out of range");
+        throw 1;
     int res = a;
     while (v[res] != res) {
         res = v[res];
