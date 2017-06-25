@@ -11,7 +11,8 @@ void UnionFind::Union(int elem, int parent) {
 }
 
 int UnionFind::Find(int a) {
-    if (a > v.size())
+    int size = v.size();
+    if (a > size)
         throw 1;
     int res = a;
     while (v[res] != res) {
