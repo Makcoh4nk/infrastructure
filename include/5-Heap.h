@@ -3,6 +3,7 @@
 
 #include <vector>
 
+using std::logic_error;
 using std::vector;
 
 template <typename T>
@@ -93,17 +94,15 @@ void Five_Heap<T>::DeleteMin() {
         array.pop_back();
         ShiftDown();
     } else {
-        throw std::logic_error("Out of range");
+        throw logic_error("Out of range");
     }
 }
 
 template <typename T>
 T Five_Heap<T>::GetMin() {
-    if (static_cast<int>(array.size()) != 0) {
-        return array[0];
-    } else {
-        throw  std::logic_error("Out of range");
-    }
+    if (static_cast<int>(array.size()) == 0)
+        throw logic_error("Out of range");
+    return array[0];
 }
 
 #endif  // INCLUDE_5_HEAP_H_
